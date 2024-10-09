@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calculate the cost</title>
+	<style type="text/css">
+		.fon{
+			background-color: #7a7171;
+			width: 100%;
+			height: 1000px;
+
+		}
+	</style>
+	
+	<script>
+		function calcuLate(f) {
+			let space = parseInt(f.space.value); if (space<10) space=10;
+			if (space>=10) f.summa.value = (space * 20) + ' гривень';
+			else           f.summa.value = '  200 грн';
+		}
+		function agreeForm(f) {
+		 	if (f.agree.checked) f.submit.disabled = 0 ;	// Если поставлен флажок, снимаем блокирование кнопки
+		 	else                 f.submit.disabled = 1; 	// В противном случае вновь блокируем кнопку
+		}
+	</script>
+
+</head>
+<body style="margin: 0px;">
+<div class="fon">
+	<form style="padding: 100px; padding-top: 100px;" align="center">
+		<fieldset>
+			<legend>Розрахування розрахунків</legend>
+			<p>Площа  : <input type="number" name="space" value="100"></p>
+			<p>Висота : <input type="number" name="height" value="2" min="2" max="4"></p>
+			<p>Глибина: <select name="deep" size="1" nomultiple>
+						<option selected value="d0">0m</option>
+						<option          value="d1">1m</option>
+						<option          value="d2">2m</option>
+						</select>
+			<p> <input type="button" name="calc" value="Розрахувати..." onclick="calcuLate(this.form)"> 
+			    <input type="text"  name="summa"  id="summa" value="       " disabled></p>
+			<p>          <input type="checkbox" name="agree"  onclick="agreeForm(this.form)">Я згодна(згоден) з усіма приколами</p>
+			<p>          <input type="submit"   name="submit" onclick="order(this.form)" value="Заказати" disabled></p>
+		</fieldset>
+	</form>
+</div>
+</body>
+</html>
