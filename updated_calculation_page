@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <title>Розрахунок вартості</title>
+    <style type="text/css">
+        .fon {
+            background-color: #7a7171;
+            width: 100%;
+            height: 1000px;
+        }
+    </style>
+    
+    <script>
+        function calculate(f) {
+            let space = parseInt(f.space.value);
+            if (space < 10) space = 10;
+
+            let cost = space * 20;
+            f.summa.value = cost + ' гривень';
+
+            // Використання alert для зворотного зв'язку
+            alert("Вартість розрахована: " + f.summa.value);
+        }
+
+        function agreeForm(f) {
+            f.submit.disabled = !f.agree.checked; // Блокування кнопки на основі checkbox
+        }
+
+        function order(f) {
+            // Використання confirm для підтвердження замовлення
+            if (confirm("Ви впевнені, що хочете замовити?")) {
+                alert("Ваше замовлення прийнято!");
+                f.submit(); // Відправка форми
+            } else {
+                alert("Замовлення скасовано.");
+            }
+        }
+
+        // Функція для валідації введених даних
+        function validateInput(f) {
+            let space = parseInt(f.space.value);
+            if (isNaN(space) || space <= 0) {
+                alert("Будь ласка, введіть коректне значення площі.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</head>
+<body style="margin: 0px;">
+<div class="fon">
+    <form style="padding: 100px; padding-top: 100px;" align="center" onsubmit="return validateInput(this);">
+        <fieldset>
+            <legend>Розрахування вартості</legend>
+            <p>Площа: <input type="number" name="space" value="100"></p>
+            <p>Висота: <input type="number" name="height" value="2" min="2" max="4"></p>
+            <p>Глибина:
+                <select name="deep" size="1" nomultiple>
+                    <option selected value="d0">0m</option>
+                    <option value="d1">1m</option>
+                    <option value="d2">2m</option>
+                </select>
+            </p>
+            <p>
+                <input type="button" name="calc" value="Розрахувати..." onclick="calculate(this.form)">
+                <input type="text" name="summa" id="summa" value="" disabled></p>
+            <p><input type="checkbox" name="agree" onclick="agreeForm(this.form)">Я згодна(згоден) з усіма умовами</p>
+            <p><input type="submit" name="submit" onclick="order(this.form)" value="Замовити" disabled></p>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
